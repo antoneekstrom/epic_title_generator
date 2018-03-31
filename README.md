@@ -5,7 +5,7 @@ An epic and powerful application to create new and interesting names.
 - Epic word generator
 - choose number of nouns, adjectives and whether to have a suffix.
 - 7 nouns, 9 adjectives and 6 suffixes to choose from!
-## Latest Features
+## Latest Updates
 ### v1.2
 - Randomize words.
 - Save words to a .txt document.
