@@ -15,6 +15,9 @@ public class Generator {
 			"garbage",
 			"person",
 			"human",
+			"lump",
+			"butt",
+			"man",
 	};
 	public static String[] adjectives = new String[] {
 			"not epic",
@@ -26,6 +29,8 @@ public class Generator {
 			"small",
 			"actual",
 			"poopy",
+			"moist",
+			"thick",
 	};
 	public static String[] suffixes = new String[] {
 			"lord",
@@ -34,20 +39,19 @@ public class Generator {
 			"consumer",
 			"sniffer",
 			"licker",
-			
 	};
 	public static int nounMax = nouns.length;
 	public static int adjMax = adjectives.length;
 	public static int suffMax = suffixes.length;
 	static int min = 0;
 	
-	public static int getInt() throws IOException {
+	public static int getInt() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		int i = 0;
 		try {
 			i = Integer.parseInt(reader.readLine());
 		}
-		catch (NumberFormatException nfe){
+		catch (Exception e){
 			System.err.println("Invalid Format");
 		}
 		
@@ -61,10 +65,14 @@ public class Generator {
 		return s;
 	}
 	
-	public static char getChar() throws IOException {
+	public static char getChar() {
+		char c = 0;
+		try {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		char c = reader.readLine().charAt(0);
-		
+		c = reader.readLine().charAt(0);
+		} catch (IOException ie) {
+			ie.printStackTrace();
+		}
 		return c;
 	}
 	public static String randomNoun() {
@@ -86,8 +94,15 @@ public class Generator {
 		return w;
 	}
 	
-	public static void main(String[] args) throws IOException {
-		char c = getChar();
-		System.out.println(c);
+	public static void main(String[] args) throws IOException {  /* main */
+		/*char c = getChar(); uncomment if things stop working, remove if they don't
+		System.out.println(c);*/
+		
+		String[] c1 = new String[] {
+				"henlo",
+				"u",
+				"stinky",
+		};
+		Core.choice(c1);
 	}
 }

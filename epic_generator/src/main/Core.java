@@ -9,23 +9,44 @@ public class Core {
 	static String newWord = "";
 	static boolean suffix = false;
 	
+	public static int choice(String[] prompt) {
+		System.out.println("<options>");
+		for (int i = 0; i < prompt.length; i++) {
+			System.out.println((i + 1) + ": " + prompt[i]);
+		}
+		System.out.println("Input:");
+		int r = Generator.getInt();
+		if (r == 0) {
+			choice(prompt);
+		}
+		return r;
+	}
+	
+	public static boolean getBool() {
+		boolean b = false;
+		char i = Generator.getChar();
+		if (i == 'y') {b = true;} else {}
+		return b;
+	}
+	
 	public static void retry() throws IOException {         /* Randomize another word. */
-		System.out.println("Generate again? (yes/no)");
-		
-		char r = Generator.getChar();
-		
-		switch (r) {
-		case 'y': System.out.println("You chose yes");
-		createWord();
-		break;
-		
-		case 'n': System.out.println("You chose no");
-				  System.out.println("done");
-		break;
-		
-		default: System.err.println("invalid input");
-		retry();
-		break;
+		String[] cr = new String[] {
+				"Save Word to text file.",
+				"Randomize another word.",
+				"Show saved words."
+		};
+
+		switch (choice(cr)) {
+		case 1:
+			Save.writeSave(", " + newWord);
+			System.out.println("'" + newWord + "'" + " has been saved to saved.txt");
+			break;
+		case 2:
+			createWord();
+			break;
+		case 3:
+			Lists.printSaved();
+			retry();
 		}
 	}
 	
@@ -50,8 +71,8 @@ public class Core {
 			newWord = newWord + Generator.randomSuffix();
 		} else {}
 		
-		System.out.println("Your Word:");
-		System.out.println("    >>>" + newWord + "<<<");	
+		System.out.print("Your Word:");
+		System.out.println("    >>>" + newWord + "<<<");
 		retry();
 	}
 	
@@ -59,8 +80,8 @@ public class Core {
 		
 		System.out.println("Word Generator");
 		
-		System.out.println("Enter 0 to see lists, any other integer to continue:");  /* Shows word arrays. */
-		if (Generator.getInt() == 0) {
+		System.out.println("Print lists? (yes/no):");  /* Shows word arrays. */
+		if (getBool() == true) {
 			for (int i = 0; i < Generator.adjMax; i++) {
 				if (i == 0) {System.out.println(">> Adjectives <<");} else {}
 				System.out.println(Generator.adjectives[i]);
@@ -87,21 +108,15 @@ public class Core {
 		System.out.println("You entered: " + adjCount);
 		
 		System.out.println("Should the word have a suffix? (yes/no):");
-		char p = Generator.getChar();
-		switch (p) {
-		case 'y':
+		if (getBool() == true) {
 			suffix = true;
-			break;
-			
-		case 'n':
-			break;
-		}
+		} else {}
 		
 		System.out.print("\nThere will be " + adjCount + " " + (adjCount == 1 ? "adjective" : "adjectives") + ", " + nounCount + " " + (nounCount == 1 ? "noun" : "nouns"));
 		if (suffix == true) {
 			System.out.print(" and a suffix.\n");
 		} else {System.out.print(" and no suffix.\n");}
-		
 		createWord();
+		retry();
 	}
 }
