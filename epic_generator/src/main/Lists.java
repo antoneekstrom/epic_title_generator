@@ -44,6 +44,7 @@ public class Lists {
 	}
 	
 	public static String[] readList(String filename) throws IOException {
+		
 		List<String> wholeList = Files.readAllLines(Paths.get(filename)); /* reads all lines into a list. */
 		String[] arrayList = wholeList.toArray(new String[0]); /* puts list into array */
 		for (int i = 0; i < arrayList.length; i++) {

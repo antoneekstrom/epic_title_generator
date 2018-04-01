@@ -31,7 +31,7 @@ public class Core {
 	
 	public static void retry() throws IOException {         /* Randomize another word. */
 		String[] cr = new String[] {
-				"Save Word to text file.",
+				"Save word to text file.",
 				"Randomize another word.",
 				"Show saved words."
 		};
